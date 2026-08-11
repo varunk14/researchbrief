@@ -1,10 +1,8 @@
 # Topic: How AI is reshaping entry-level jobs
 # One URL per line. Blank lines and lines starting with '#' are ignored.
-# Four sources load with substantive content; the last is included on purpose to
-# show graceful failure (a JS/consent wall) surfaced in the source ledger.
 
-https://www.brookings.edu/articles/generative-ai-the-american-worker-and-the-future-of-work/
-https://en.wikipedia.org/wiki/Technological_unemployment
-https://en.wikipedia.org/wiki/Workplace_impact_of_artificial_intelligence
-https://arxiv.org/abs/2303.10130
-https://www.weforum.org/publications/the-future-of-jobs-report-2023/
+https://insights.som.yale.edu/insights/the-real-job-destruction-from-ai-is-hitting-before-careers-can-start
+https://www.library.hbs.edu/working-knowledge/enhance-or-eliminate-how-ai-will-likely-change-these-jobs
+https://gloat.com/blog/ai-labor-market/
+https://www.brookings.edu/articles/measuring-us-workers-capacity-to-adapt-to-ai-driven-job-displacement/
+https://www.jpmorgan.com/insights/global-research/artificial-intelligence/ai-impact-job-growth

@@ -2,8 +2,7 @@
 
 ## How this was built
 
-The exercise itself is the Round 2 build brief (research-and-summarize agent
-given a topic and 3-5 URLs). The build ran in two steps:
+The build ran in two steps:
 
 1. **Planning prompt (Claude, web app).** I first had a model turn the brief into
    an incremental plan and a test harness before any code was written. The prompt
