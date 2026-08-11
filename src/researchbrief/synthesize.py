@@ -19,8 +19,15 @@ Topic: {topic}
 Each claim is labelled with only its source id, so group by CONTENT, not by which
 source is more authoritative. Group claims that address the SAME underlying
 question, even when worded differently. For every group give a short topic_label
-phrased as a question, and list any opposing pairs of claim ids that directly
-contradict each other.
+phrased as a question.
+
+Then actively look for disagreement WITHIN each group. Two claims oppose when they
+answer the same question differently in direction (creates vs destroys jobs),
+magnitude (13% vs 40%), or timeframe (near-term vs long-run). Do not require the
+wording to be mirror opposites; a claim that automation raises employment opposes
+one that it lowers employment. List every such pair in opposing_pairs, and in
+rationale name what the disagreement is about (direction, magnitude or timeframe).
+Only leave opposing_pairs empty when the sources genuinely align.
 
 Return JSON of the form:
 {{"clusters": [{{"topic_label": "...?", "claim_ids": ["S1-C01", "S3-C01"],

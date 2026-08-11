@@ -21,12 +21,15 @@ from .config import Config
 from .models import FetchResult, FetchStatus
 
 PAYWALL_MARKERS = ("subscribe to continue", "metered", "paywall", "sign in to read")
+# Match genuine bot-wall interstitials, not any page that merely mentions
+# "cloudflare" or "captcha" in a script or article body.
 BLOCK_MARKERS = (
-    "cloudflare",
-    "captcha",
-    "checking your browser",
-    "cf-challenge",
-    "attention required",
+    "attention required! | cloudflare",
+    "checking your browser before accessing",
+    "cf-browser-verification",
+    "please verify you are a human",
+    "enable javascript and cookies to continue",
+    "verifying you are human",
 )
 MIN_OK_BYTES = 500
 MAX_REDIRECTS = 6

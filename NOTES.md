@@ -1,58 +1,47 @@
 # Notes
 
-Scope decisions and assumptions behind researchbrief.
+## Approach
 
-## Assumptions
+Five staged steps, not one prompt: fetch, extract, extract-claims, synthesize,
+render. Each fails and retries differently (network vs schema vs reasoning), so
+keeping them separate makes each testable. Only two stages call a model. Claim
+extraction runs per source so it cannot smooth claims toward a false consensus;
+synthesis sees every claim at once, labelled only by source id, so it groups by
+content rather than by source authority. The model only groups and marks
+opposition; the verdict (consensus / contested / outlier) is assigned in code, so
+it is deterministic and testable. Every claim carries a verbatim quote and is
+dropped if that quote is not found in the source, which is the anti-hallucination
+guarantee.
 
-1. **Sources are given and trusted as inputs.** The agent does not judge source
-   credibility. It reports what each source claims and who disagrees, not who is
-   right.
-2. **Contradiction is detected at the claim level, not the sentence level.** Two
-   sources giving different numbers for the same quantity is a contradiction of
-   magnitude and is reported as contested, with the kind of disagreement named.
-3. **Absence of a claim is not disagreement.** A source that does not address a
-   topic is a coverage gap, never an opposing view. Conflating the two is the
-   most common failure of a naive implementation, so gaps are computed and
-   reported separately.
-4. **JS-only pages are detected and reported, not rendered.** A headless browser
-   was judged a poor use of the build budget relative to the reasoning layer.
-5. **English-language sources are assumed.**
+## Assumptions (made rather than asked)
 
-## Non-goals
+- Sources are given and trusted; the tool reports what each claims and who
+  disagrees, it does not judge credibility.
+- Absence of a claim is a coverage gap, not disagreement. These are reported
+  separately so silence is never read as agreement.
+- Contradiction is judged at the claim level (a magnitude difference counts).
+- JS-only pages are detected and reported, not rendered.
 
-- No web search or source discovery; the URLs are provided.
-- No headless browser; JavaScript-only shells are reported as failures.
-- No vector database; clustering is a single model call over a bounded claim set.
-- No web UI; Markdown is the deliverable.
-- No multi-turn conversation.
+## What I would do differently for production
 
-## Design choices
+- Cache the claim and synthesis stages like the fetch stage, so a rerun after a
+  formatting change does not re-call the model.
+- Add a headless-browser fallback for JS-only pages instead of reporting them as
+  failures, and a small pool of extraction strategies per domain.
+- Make synthesis more robust at scale: chunk the claim set and reconcile, rather
+  than one call, once corpora exceed a few dozen sources.
+- Observability: structured run metrics, retries and cost per source shipped to a
+  dashboard, not just a run.log.
 
-- **Staged, not one big prompt.** Each stage fails differently and retries
-  differently: a fetch failure is a network problem, a claim failure is a schema
-  problem, a synthesis failure is a reasoning problem. One giant prompt makes all
-  three indistinguishable and untestable.
-- **Per-source extraction, whole-corpus synthesis.** Extraction never sees other
-  sources, so it cannot smooth claims toward a consensus that was not in the
-  text. Synthesis sees everything at once, so it can detect contradiction.
-- **Verdict in code, grouping in the model.** The model groups claims and marks
-  opposition; consensus/contested/outlier is decided deterministically in code,
-  so the result is testable and identical across runs.
-- **Quote verification.** Every claim carries a verbatim quote; a claim whose
-  quote is not found in the source text is dropped. This is the anti-hallucination
-  guarantee and it is cheap.
+## Tradeoffs from the 2-hour budget
 
-## Provider
-
-The default model provider is Google Gemini (free tier); Anthropic is supported
-as a fallback, selected by the `LLM_PROVIDER` environment variable. All model
-access sits behind one small client, so no stage names a provider.
-
-## What I would improve with more time
-
-- Cache the claim and synthesis stages to disk like the fetch stage, so a rerun
-  after a rendering tweak does not re-call the model.
-- Support repeated bare `--urls` more richly (per-URL labels), and add a
-  `--refresh` flag to bypass the fetch cache.
-- Group forecasts by timeframe so contested forecasts distinguish "disagree on
-  direction" from "disagree on when".
+- No headless browser; JS shells are classified and surfaced in the ledger
+  instead of rendered. This was judged a poor use of the budget relative to the
+  reasoning layer, which is what is being evaluated.
+- Single synthesis call over a bounded claim set, no vector store or clustering
+  library.
+- Free-tier Gemini flash for both stages (Pro has no free quota); the provider
+  sits behind one client, so swapping to a stronger model is a one-line change.
+- Contradiction detection depends on the model marking oppositions; the code
+  guarantees structure and determinism, but recall of subtle disagreements is
+  only as good as the grouping call.

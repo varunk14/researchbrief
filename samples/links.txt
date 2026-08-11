@@ -1,8 +1,10 @@
 # Topic: How AI is reshaping entry-level jobs
 # One URL per line. Blank lines and lines starting with '#' are ignored.
+# Four sources load with substantive content; the last is included on purpose to
+# show graceful failure (a JS/consent wall) surfaced in the source ledger.
 
 https://www.brookings.edu/articles/generative-ai-the-american-worker-and-the-future-of-work/
-https://www.nber.org/papers/w31161
-https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america
-https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity
+https://en.wikipedia.org/wiki/Technological_unemployment
+https://en.wikipedia.org/wiki/Workplace_impact_of_artificial_intelligence
+https://arxiv.org/abs/2303.10130
 https://www.weforum.org/publications/the-future-of-jobs-report-2023/
