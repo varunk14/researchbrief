@@ -12,11 +12,12 @@ from pathlib import Path
 
 # Model ids per provider and tier. Stage 3 uses the fast tier, stage 4 the smart
 # tier. Verify these against the provider's current docs before relying on them.
-# Gemini free tier has effectively no quota for Pro models (they return 429) and
-# gates 2.x models for new API users, so both tiers use available flash models.
-# gemini-3.5-flash is the stronger of the two and handles the synthesis step.
+# Gemini free tier gates Pro and 2.x models for new API users and gives the very
+# newest flash models a tiny daily quota. The fast stage therefore uses the
+# flash-lite tier, which has the most generous free quota; synthesis uses the
+# stronger 3.5-flash and falls back to the fast model if it is rate limited.
 MODELS: dict[str, dict[str, str]] = {
-    "gemini": {"fast": "gemini-flash-latest", "smart": "gemini-3.5-flash"},
+    "gemini": {"fast": "gemini-flash-lite-latest", "smart": "gemini-3.5-flash"},
     "anthropic": {"fast": "claude-haiku-4-5-20251001", "smart": "claude-sonnet-5"},
 }
 
