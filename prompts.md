@@ -1,7 +1,10 @@
 # Prompts
 
-The two model-facing stages and the prompts they use. Both stages run at
-temperature 0 with JSON output and one retry that feeds the parse error back.
+Only two of the five pipeline stages call a model, so only two have prompts.
+Fetch (stage 1), extraction (stage 2) and rendering (stage 5) are deterministic
+code with no model call, on purpose: keeping those checks model-free is what
+makes them testable and reproducible. The two model-facing stages below both run
+at temperature 0 with JSON output and one retry that feeds the parse error back.
 
 ## Stage 3 - Claim extraction (fast model, one call per source)
 
