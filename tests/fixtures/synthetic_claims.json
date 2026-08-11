@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {"source_id": "S1", "url": "https://a.example/report", "title": "Labor Futures Report", "domain": "a.example", "status": "OK", "extractor": "trafilatura", "quality": 0.92, "usable": true},
+    {"source_id": "S2", "url": "https://b.example/study", "title": "AI and Skills Study", "domain": "b.example", "status": "OK", "extractor": "trafilatura", "quality": 0.88, "usable": true},
+    {"source_id": "S3", "url": "https://c.example/analysis", "title": "Employment Outlook", "domain": "c.example", "status": "OK", "extractor": "readability", "quality": 0.81, "usable": true},
+    {"source_id": "S4", "url": "https://d.example/brief", "title": "Productivity Brief", "domain": "d.example", "status": "OK", "extractor": "trafilatura", "quality": 0.9, "usable": true},
+    {"source_id": "S5", "url": "https://e.example/premium", "title": null, "domain": "e.example", "status": "PAYWALLED", "extractor": "none", "quality": 0.2, "usable": false}
+  ],
+  "claims": [
+    {"id": "S1-C01", "source_id": "S1", "text": "AI will increase net employment over the next decade.", "quote": "we project net employment rises over the coming decade", "claim_type": "forecast", "confidence": 0.7},
+    {"id": "S3-C01", "source_id": "S3", "text": "AI will decrease net employment over the next decade.", "quote": "net employment is projected to decline over the next ten years", "claim_type": "forecast", "confidence": 0.72},
+    {"id": "S1-C02", "source_id": "S1", "text": "AI productivity gains are concentrated among high-skill occupations.", "quote": "the largest gains accrue to high-skill occupations", "claim_type": "empirical", "confidence": 0.8},
+    {"id": "S2-C01", "source_id": "S2", "text": "The largest AI productivity gains accrue to high-skill workers.", "quote": "high-skill workers capture most of the measured productivity gains", "claim_type": "empirical", "confidence": 0.83},
+    {"id": "S4-C01", "source_id": "S4", "text": "Productivity improvements from AI cluster among skilled professionals.", "quote": "improvements concentrate among skilled professionals", "claim_type": "empirical", "confidence": 0.79},
+    {"id": "S2-C02", "source_id": "S2", "text": "Governments should fund large-scale retraining for displaced workers.", "quote": "public funding for retraining at scale is warranted", "claim_type": "normative", "confidence": 0.6}
+  ],
+  "expected_grouping": [
+    {"topic_label": "Will AI increase or decrease net employment?", "claim_ids": ["S1-C01", "S3-C01"], "opposing_pairs": [["S1-C01", "S3-C01"]]},
+    {"topic_label": "Where are AI productivity gains concentrated?", "claim_ids": ["S1-C02", "S2-C01", "S4-C01"], "opposing_pairs": []},
+    {"topic_label": "How should displaced workers be supported?", "claim_ids": ["S2-C02"], "opposing_pairs": []}
+  ]
+}

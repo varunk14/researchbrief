@@ -42,6 +42,40 @@ Parser error: {error}
 Return only a single valid JSON object of the required shape, nothing else.
 ```
 
-## Stage 4 - Cross-source synthesis
+## Stage 4 - Cross-source synthesis (smart model, one call over all claims)
 
-Documented in this file when the synthesis stage is built.
+Sees every claim at once, labelled only by source id so it cannot resolve a
+disagreement by source authority. It groups claims by the underlying question
+and marks opposing pairs. It does NOT assign the verdict: consensus, contested
+and outlier are decided in code from cluster membership, so the labels are
+deterministic and testable.
+
+```
+You are grouping claims drawn from several sources about a topic.
+
+Topic: {topic}
+
+Each claim is labelled with only its source id, so group by CONTENT, not by which
+source is more authoritative. Group claims that address the SAME underlying
+question, even when worded differently. For every group give a short topic_label
+phrased as a question, and list any opposing pairs of claim ids that directly
+contradict each other.
+
+Return JSON of the form:
+{"clusters": [{"topic_label": "...?", "claim_ids": ["S1-C01", "S3-C01"],
+  "opposing_pairs": [["S1-C01", "S3-C01"]], "rationale": "what the disagreement is about"}]}
+
+Put every claim in exactly one group. Do not invent claim ids.
+
+CLAIMS:
+{claims}
+```
+
+Verdict rule applied in code after the call:
+
+```
+if any opposing pair in the cluster is from two different sources -> CONTESTED
+elif the cluster spans two or more distinct sources                -> CONSENSUS
+else                                                               -> OUTLIER
+```
+
