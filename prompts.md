@@ -1,5 +1,42 @@
 # Prompts
 
+## How this was built
+
+The exercise itself is the Round 2 build brief (research-and-summarize agent
+given a topic and 3-5 URLs). The build ran in two steps:
+
+1. **Planning prompt (Claude, web app).** I first had a model turn the brief into
+   an incremental plan and a test harness before any code was written. The prompt
+   is recorded below.
+2. **Execution (Claude Code).** I then built the agent stage by stage, each stage
+   gated by its own tests before it was committed.
+
+### Planning prompt
+
+```
+Build a research-and-summarize agent (see attached brief and sample links).
+I will build it using Claude Code.
+
+Set up the scaffolding before any code is written:
+
+1. A product plan that divides the build into multiple small MVPs, each small
+   enough to complete and verify on its own, and unambiguous enough to build
+   from directly.
+2. Operating rules for the coding agent across the whole build.
+3. A progress file that tracks which MVP is done, what was decided, and what is
+   next.
+4. One rigorous test set per MVP. After each MVP the tests verify the build
+   works; only then does the code get committed and pushed.
+
+Workflow per MVP: build -> run its tests -> tests pass -> update progress ->
+commit -> push. No commit on a failing test.
+
+Git rules: no AI co-author or attribution trailers, no decorative emoji, and
+commit messages precise enough for a stranger to follow.
+```
+
+### Model-facing stage prompts
+
 Only two of the five pipeline stages call a model, so only two have prompts.
 Fetch (stage 1), extraction (stage 2) and rendering (stage 5) are deterministic
 code with no model call, on purpose: keeping those checks model-free is what
