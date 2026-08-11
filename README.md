@@ -5,6 +5,11 @@ A command-line agent that reads a topic and 3-5 source URLs and produces a
 one source says, and what nobody covers. The point is cross-source reasoning, not
 a stack of per-source summaries.
 
+![researchbrief running end to end](assets/demo.gif)
+
+The run above fetches five sources, handles a paywalled one gracefully, and
+produces a brief that separates consensus from a real cross-source contradiction.
+
 ## What it produces
 
 Written to the output directory:
