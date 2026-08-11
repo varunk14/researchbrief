@@ -69,7 +69,9 @@ def test_too_few_usable_sources_exits_three(tmp_path):
 
 @pytest.mark.live
 def test_end_to_end_produces_a_brief(tmp_path):
-    assert os.environ.get("ANTHROPIC_API_KEY"), "set ANTHROPIC_API_KEY to run the live tests"
+    provider = os.environ.get("LLM_PROVIDER", "gemini")
+    key_name = "GEMINI_API_KEY" if provider == "gemini" else "ANTHROPIC_API_KEY"
+    assert os.environ.get(key_name), f"set {key_name} to run the live tests"
 
     out = tmp_path / "out"
     start = time.monotonic()

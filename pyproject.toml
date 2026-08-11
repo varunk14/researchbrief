@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "researchbrief"
+version = "0.1.0"
+description = "Cross-source research brief generator"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "trafilatura>=1.8",
+    "readability-lxml>=0.8.1",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.2",
+    "google-genai>=1.0",
+    "anthropic>=0.40",
+]
+
+[project.scripts]
+researchbrief = "researchbrief.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
