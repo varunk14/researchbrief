@@ -1,0 +1,22 @@
+{
+  "claims": [
+    {
+      "text": "Junior-role hiring fell 13 percent over the past year.",
+      "quote": "hiring for the most junior roles fell by 13 percent over the past year",
+      "claim_type": "empirical",
+      "confidence": 0.9
+    },
+    {
+      "text": "AI will eliminate 40 percent by 2031.",
+      "quote": "artificial intelligence will eliminate forty percent of all entry-level jobs by 2031",
+      "claim_type": "forecast",
+      "confidence": 0.6
+    },
+    {
+      "text": "Senior workers saw employment hold steady or grow.",
+      "quote": "Senior workers in the same occupations saw employment hold steady or grow",
+      "claim_type": "empirical",
+      "confidence": 0.85
+    }
+  ]
+}

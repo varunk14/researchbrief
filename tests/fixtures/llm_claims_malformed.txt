@@ -1,0 +1,6 @@
+Sure, here are the claims I extracted from the article:
+
+1. Junior hiring fell 13 percent.
+2. Senior workers held steady.
+
+{ claims: [ { text: "unquoted keys and a truncated object that never clos

@@ -1,0 +1,34 @@
+{
+  "claims": [
+    {
+      "text": "Hiring for the most junior roles fell by 13 percent over the past year at firms adopting generative tools.",
+      "quote": "hiring for the most junior roles fell by 13 percent over the past year",
+      "claim_type": "empirical",
+      "confidence": 0.9
+    },
+    {
+      "text": "The decline in junior hiring was sharpest in routine drafting, first-pass research, and template-driven coding roles.",
+      "quote": "The decline was sharpest in occupations built around routine drafting, first-pass research, and template-driven code",
+      "claim_type": "empirical",
+      "confidence": 0.85
+    },
+    {
+      "text": "Entry-level work has historically converted codified knowledge into trained judgment.",
+      "quote": "Entry-level work has long been the way firms convert codified knowledge into trained judgment",
+      "claim_type": "causal",
+      "confidence": 0.8
+    },
+    {
+      "text": "Senior workers in the same occupations saw employment hold steady or grow.",
+      "quote": "Senior workers in the same occupations saw employment hold steady or grow",
+      "claim_type": "empirical",
+      "confidence": 0.88
+    },
+    {
+      "text": "Some firms pair junior workers with models and grade their edits rather than their drafts.",
+      "quote": "Some are pairing juniors with models and grading the edits rather than the drafts",
+      "claim_type": "empirical",
+      "confidence": 0.75
+    }
+  ]
+}
